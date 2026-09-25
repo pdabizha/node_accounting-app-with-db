@@ -38,7 +38,7 @@ const Expense = sequelize.define(
     },
   },
   {
-    tableName: 'espenses',
+    tableName: 'expenses',
     timestamps: true,
     defaultScope: {
       attributes: {

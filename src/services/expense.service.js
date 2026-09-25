@@ -1,15 +1,19 @@
 const { Op } = require('sequelize');
 const { Expense } = require('../models/Expense.model');
 
-function getAll({ userId, category, from, to } = {}) {
+function getAll({ userId, categories, from, to } = {}) {
   const where = {};
 
   if (userId) {
     where.userId = userId;
   }
 
-  if (category) {
-    where.category = category;
+  if (categories) {
+    const categoryList = categories.split(',');
+
+    where.category = {
+      [Op.in]: categoryList,
+    };
   }
 
   if (from || to) {

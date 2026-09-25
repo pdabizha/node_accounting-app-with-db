@@ -8,7 +8,7 @@ const getAll = async (req, res) => {
 
   const expenses = await expensesService.getAll({
     userId,
-    category: categories,
+    categories,
     from,
     to,
   });
@@ -31,7 +31,12 @@ const getOne = async (req, res) => {
 const create = async (req, res) => {
   const expense = req.body;
 
-  if (!expense.title || !expense.userId) {
+  if (
+    !expense.spentAt ||
+    !expense.title ||
+    !expense.amount ||
+    !expense.userId
+  ) {
     return res.status(400).json({ error: 'Missing required fields' });
   }
 
